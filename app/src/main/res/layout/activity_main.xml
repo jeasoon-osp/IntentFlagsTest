@@ -1,18 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Main Activity !"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:id="@+id/sv_flags_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_btn_container"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_CLEAR_TASK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_CLEAR_TASK"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_CLEAR_TOP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_CLEAR_TOP"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_BROUGHT_TO_FRONT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_BROUGHT_TO_FRONT"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_FORWARD_RESULT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_FORWARD_RESULT"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_NEW_TASK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_NEW_TASK"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_NEW_DOCUMENT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_NEW_DOCUMENT"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_MULTIPLE_TASK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_MULTIPLE_TASK"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_NO_ANIMATION"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_NO_ANIMATION"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_NO_HISTORY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_NO_HISTORY"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_NO_USER_ACTION"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_NO_USER_ACTION"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_PREVIOUS_IS_TOP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_PREVIOUS_IS_TOP"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_LAUNCH_ADJACENT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_LAUNCH_ADJACENT"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_REORDER_TO_FRONT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_REORDER_TO_FRONT"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_RESET_TASK_IF_NEEDED"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_RESET_TASK_IF_NEEDED"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_RETAIN_IN_RECENTS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_RETAIN_IN_RECENTS"
+                tools:ignore="HardcodedText" />
+
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_SINGLE_TOP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_SINGLE_TOP"
+                tools:ignore="HardcodedText" />
+
+
+            <CheckBox
+                android:id="@+id/FLAG_ACTIVITY_TASK_ON_HOME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_ACTIVITY_TASK_ON_HOME"
+                tools:ignore="HardcodedText" />
+
+
+            <CheckBox
+                android:id="@+id/FLAG_DEBUG_LOG_RESOLUTION"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_DEBUG_LOG_RESOLUTION"
+                tools:ignore="HardcodedText" />
+
+
+            <CheckBox
+                android:id="@+id/FLAG_EXCLUDE_STOPPED_PACKAGES"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_EXCLUDE_STOPPED_PACKAGES"
+                tools:ignore="HardcodedText" />
+
+
+            <CheckBox
+                android:id="@+id/FLAG_FROM_BACKGROUND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLAG_FROM_BACKGROUND"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/rl_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/singleInstance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="singleInstance"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/singleTask"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="singleTask"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/singleTop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="singleTop"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/standard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="standard"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/singleInstance_forResult"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="singleInstance\nforResult"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/singleTask_forResult"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="singleTask\nforResult"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/singleTop_forResult"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="singleTop\nforResult"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/standard_forResult"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="standard\nforResult"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

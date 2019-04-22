@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/select_all"
+        android:contentDescription="@null"
+        android:showAsAction="ifRoom"
+        android:title="全选"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/cancel_select_all"
+        android:contentDescription="@null"
+        android:showAsAction="ifRoom"
+        android:title="取消全选"
+        tools:ignore="HardcodedText" />
+
+</menu>
