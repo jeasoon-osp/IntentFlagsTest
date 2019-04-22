@@ -19,22 +19,86 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SingleInstanceActivity"
             android:label="SingleInstance"
             android:launchMode="singleInstance" />
         <activity
+            android:name=".SingleInstanceActivity_AffinityA"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":A" />
+        <activity
+            android:name=".SingleInstanceActivity_AffinityB"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":B" />
+        <activity
+            android:name=".SingleInstanceActivity_AffinityC"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":C" />
+
+        <activity
             android:name=".SingleTaskActivity"
             android:label="SingleTask"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".SingleTaskActivity_AffinityA"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":A" />
+        <activity
+            android:name=".SingleTaskActivity_AffinityB"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":B" />
+        <activity
+            android:name=".SingleTaskActivity_AffinityC"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":C" />
+
         <activity
             android:name=".SingleTopActivity"
             android:label="SingleTop"
             android:launchMode="singleTop" />
         <activity
+            android:name=".SingleTopActivity_AffinityA"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":A" />
+        <activity
+            android:name=".SingleTopActivity_AffinityB"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":B" />
+        <activity
+            android:name=".SingleTopActivity_AffinityC"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":C" />
+
+        <activity
             android:name=".StandardActivity"
             android:label="Standard"
             android:launchMode="standard" />
+        <activity
+            android:name=".StandardActivity_AffinityA"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":A" />
+        <activity
+            android:name=".StandardActivity_AffinityB"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":B" />
+        <activity
+            android:name=".StandardActivity_AffinityC"
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":C" />
     </application>
 
 </manifest>

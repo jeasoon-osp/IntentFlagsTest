@@ -21,6 +21,11 @@ public abstract class BaseActivity extends Activity {
 
     private static final String TAG = "zjs";
 
+    private static final int TASK_AFFINITY_NONE = 0;
+    private static final int TASK_AFFINITY_A    = 1;
+    private static final int TASK_AFFINITY_B    = 2;
+    private static final int TASK_AFFINITY_C    = 3;
+
     @BindView(R.id.FLAG_ACTIVITY_CLEAR_TASK)            CheckBox   FLAG_ACTIVITY_CLEAR_TASK;
     @BindView(R.id.FLAG_ACTIVITY_CLEAR_TOP)             CheckBox   FLAG_ACTIVITY_CLEAR_TOP;
     @BindView(R.id.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)  CheckBox   FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS;
@@ -45,19 +50,27 @@ public abstract class BaseActivity extends Activity {
     @BindView(R.id.FLAG_FROM_BACKGROUND)                CheckBox   FLAG_FROM_BACKGROUND;
     @BindView(R.id.sv_flags_container)                  ScrollView svFlagsContainer;
 
+    private int    mCurrentAffinity;
+    private int    mTargetAffinity = TASK_AFFINITY_NONE;
+    private String mOriginTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-        initCheckBoxByFlags();
         initView();
+        initCheckBoxByFlags();
         Log.e(TAG, String.format(Locale.ENGLISH, "Lifecycle -> onCreate: activity=%s, hashCode=0x%X", getClass().getSimpleName(), hashCode()));
     }
 
     protected void initView() {
         svFlagsContainer.post(() -> svFlagsContainer.scrollTo(getIntent().getIntExtra("sv_x", 0), getIntent().getIntExtra("sv_y", 0)));
+        CharSequence title = getTitle();
+        mOriginTitle = title == null ? " " : title.toString();
+        mCurrentAffinity = getIntent().getIntExtra("affinity_cur", TASK_AFFINITY_NONE);
+        changeTaskAffinity(mCurrentAffinity);
     }
 
     @Override
@@ -123,8 +136,47 @@ public abstract class BaseActivity extends Activity {
             case R.id.cancel_select_all:
                 setAllCheckBoxSelection(false);
                 return true;
+            case R.id.affinity_none:
+                changeTaskAffinity(TASK_AFFINITY_NONE);
+                return true;
+            case R.id.affinity_a:
+                changeTaskAffinity(TASK_AFFINITY_A);
+                return true;
+            case R.id.affinity_b:
+                changeTaskAffinity(TASK_AFFINITY_B);
+                return true;
+            case R.id.affinity_c:
+                changeTaskAffinity(TASK_AFFINITY_C);
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void changeTaskAffinity(int target) {
+        mTargetAffinity = target;
+        String currentAffinity = parseTaskAffinityName(mCurrentAffinity);
+        String targetAffinity  = parseTaskAffinityName(target);
+        setTitle(String.format(Locale.ENGLISH, "%s %s -- %s", mOriginTitle, currentAffinity, targetAffinity));
+    }
+
+    private String parseTaskAffinityName(int affinity) {
+        String targetAffinity;
+        switch (affinity) {
+            case TASK_AFFINITY_A:
+                targetAffinity = "A";
+                break;
+            case TASK_AFFINITY_B:
+                targetAffinity = "B";
+                break;
+            case TASK_AFFINITY_C:
+                targetAffinity = "C";
+                break;
+            case TASK_AFFINITY_NONE:
+            default:
+                targetAffinity = "NA";
+                break;
+        }
+        return targetAffinity;
     }
 
     private void setAllCheckBoxSelection(boolean select) {
@@ -166,51 +218,103 @@ public abstract class BaseActivity extends Activity {
 
     @OnClick(R.id.standard)
     void standard(View view) {
-        startActivity(StandardActivity.class);
+        startActivity(getStandardActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.singleTop)
     void singleTop(View view) {
-        startActivity(SingleTopActivity.class);
+        startActivity(getSingleTopActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.singleTask)
     void singleTask(View view) {
-        startActivity(SingleTaskActivity.class);
+        startActivity(getSingleTaskActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.singleInstance)
     void singleInstance(View view) {
-        startActivity(SingleInstanceActivity.class);
+        startActivity(getSingleInstanceActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.standard_forResult)
     void standardForResult(View view) {
-        startActivityForResult(StandardActivity.class);
+        startActivityForResult(getStandardActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.singleTop_forResult)
     void singleTopForResult(View view) {
-        startActivityForResult(SingleTopActivity.class);
+        startActivityForResult(getSingleTopActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.singleTask_forResult)
     void singleTaskForResult(View view) {
-        startActivityForResult(SingleTaskActivity.class);
+        startActivityForResult(getSingleTaskActivityClassByTaskAffinity());
     }
 
     @OnClick(R.id.singleInstance_forResult)
     void singleInstanceForResult(View view) {
-        startActivityForResult(SingleInstanceActivity.class);
+        startActivityForResult(getSingleInstanceActivityClassByTaskAffinity());
+    }
+
+    private Class<? extends BaseActivity> getStandardActivityClassByTaskAffinity() {
+        switch (mTargetAffinity) {
+            case TASK_AFFINITY_A:
+                return StandardActivity_AffinityA.class;
+            case TASK_AFFINITY_B:
+                return StandardActivity_AffinityB.class;
+            case TASK_AFFINITY_C:
+                return StandardActivity_AffinityC.class;
+            case TASK_AFFINITY_NONE:
+            default:
+                return StandardActivity.class;
+        }
+    }
+
+    private Class<? extends BaseActivity> getSingleTopActivityClassByTaskAffinity() {
+        switch (mTargetAffinity) {
+            case TASK_AFFINITY_A:
+                return SingleTopActivity_AffinityA.class;
+            case TASK_AFFINITY_B:
+                return SingleTopActivity_AffinityB.class;
+            case TASK_AFFINITY_C:
+                return SingleTopActivity_AffinityC.class;
+            case TASK_AFFINITY_NONE:
+            default:
+                return SingleTopActivity.class;
+        }
+    }
+
+    private Class<? extends BaseActivity> getSingleTaskActivityClassByTaskAffinity() {
+        switch (mTargetAffinity) {
+            case TASK_AFFINITY_A:
+                return SingleTaskActivity_AffinityA.class;
+            case TASK_AFFINITY_B:
+                return SingleTaskActivity_AffinityB.class;
+            case TASK_AFFINITY_C:
+                return SingleTaskActivity_AffinityC.class;
+            case TASK_AFFINITY_NONE:
+            default:
+                return SingleTaskActivity.class;
+        }
+    }
+
+    private Class<? extends BaseActivity> getSingleInstanceActivityClassByTaskAffinity() {
+        switch (mTargetAffinity) {
+            case TASK_AFFINITY_A:
+                return SingleInstanceActivity_AffinityA.class;
+            case TASK_AFFINITY_B:
+                return SingleInstanceActivity_AffinityB.class;
+            case TASK_AFFINITY_C:
+                return SingleInstanceActivity_AffinityC.class;
+            case TASK_AFFINITY_NONE:
+            default:
+                return SingleInstanceActivity.class;
+        }
     }
 
     private void startActivity(Class<? extends BaseActivity> target) {
-        Intent intent = new Intent(this, target);
-        intent.setFlags(collectFlags());
-        intent.putExtra("sv_x", svFlagsContainer.getScrollX());
-        intent.putExtra("sv_y", svFlagsContainer.getScrollY());
         try {
-            startActivity(intent);
+            startActivity(prepareIntent(target));
         } catch (Exception e) {
             Toast.makeText(this, String.format(Locale.ENGLISH, "启动失败: %s", e.getMessage()), Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -218,14 +322,21 @@ public abstract class BaseActivity extends Activity {
     }
 
     private void startActivityForResult(Class<? extends BaseActivity> target) {
-        Intent intent = new Intent(this, target);
-        intent.setFlags(collectFlags());
         try {
-            startActivityForResult(intent, hashCode() & 0xFFFF);
+            startActivityForResult(prepareIntent(target), hashCode() & 0xFFFF);
         } catch (Exception e) {
             Toast.makeText(this, String.format(Locale.ENGLISH, "启动失败: %s", e.getMessage()), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+    }
+
+    private Intent prepareIntent(Class<? extends BaseActivity> target) {
+        Intent intent = new Intent(this, target);
+        intent.setFlags(collectFlags());
+        intent.putExtra("sv_x", svFlagsContainer.getScrollX());
+        intent.putExtra("sv_y", svFlagsContainer.getScrollY());
+        intent.putExtra("affinity_cur", mTargetAffinity);
+        return intent;
     }
 
     private int collectFlags() {
