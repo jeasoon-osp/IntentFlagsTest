@@ -22,36 +22,59 @@ public abstract class BaseActivity extends Activity {
     private static final String TAG = "zjs";
 
     private static final int TASK_AFFINITY_NONE = 0;
-    private static final int TASK_AFFINITY_A    = 1;
-    private static final int TASK_AFFINITY_B    = 2;
-    private static final int TASK_AFFINITY_C    = 3;
+    private static final int TASK_AFFINITY_A = 1;
+    private static final int TASK_AFFINITY_B = 2;
+    private static final int TASK_AFFINITY_C = 3;
 
-    @BindView(R.id.FLAG_ACTIVITY_CLEAR_TASK)            CheckBox   FLAG_ACTIVITY_CLEAR_TASK;
-    @BindView(R.id.FLAG_ACTIVITY_CLEAR_TOP)             CheckBox   FLAG_ACTIVITY_CLEAR_TOP;
-    @BindView(R.id.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)  CheckBox   FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS;
-    @BindView(R.id.FLAG_ACTIVITY_BROUGHT_TO_FRONT)      CheckBox   FLAG_ACTIVITY_BROUGHT_TO_FRONT;
-    @BindView(R.id.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) CheckBox   FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY;
-    @BindView(R.id.FLAG_ACTIVITY_FORWARD_RESULT)        CheckBox   FLAG_ACTIVITY_FORWARD_RESULT;
-    @BindView(R.id.FLAG_ACTIVITY_NEW_TASK)              CheckBox   FLAG_ACTIVITY_NEW_TASK;
-    @BindView(R.id.FLAG_ACTIVITY_NEW_DOCUMENT)          CheckBox   FLAG_ACTIVITY_NEW_DOCUMENT;
-    @BindView(R.id.FLAG_ACTIVITY_MULTIPLE_TASK)         CheckBox   FLAG_ACTIVITY_MULTIPLE_TASK;
-    @BindView(R.id.FLAG_ACTIVITY_NO_ANIMATION)          CheckBox   FLAG_ACTIVITY_NO_ANIMATION;
-    @BindView(R.id.FLAG_ACTIVITY_NO_HISTORY)            CheckBox   FLAG_ACTIVITY_NO_HISTORY;
-    @BindView(R.id.FLAG_ACTIVITY_NO_USER_ACTION)        CheckBox   FLAG_ACTIVITY_NO_USER_ACTION;
-    @BindView(R.id.FLAG_ACTIVITY_PREVIOUS_IS_TOP)       CheckBox   FLAG_ACTIVITY_PREVIOUS_IS_TOP;
-    @BindView(R.id.FLAG_ACTIVITY_LAUNCH_ADJACENT)       CheckBox   FLAG_ACTIVITY_LAUNCH_ADJACENT;
-    @BindView(R.id.FLAG_ACTIVITY_REORDER_TO_FRONT)      CheckBox   FLAG_ACTIVITY_REORDER_TO_FRONT;
-    @BindView(R.id.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)  CheckBox   FLAG_ACTIVITY_RESET_TASK_IF_NEEDED;
-    @BindView(R.id.FLAG_ACTIVITY_RETAIN_IN_RECENTS)     CheckBox   FLAG_ACTIVITY_RETAIN_IN_RECENTS;
-    @BindView(R.id.FLAG_ACTIVITY_SINGLE_TOP)            CheckBox   FLAG_ACTIVITY_SINGLE_TOP;
-    @BindView(R.id.FLAG_ACTIVITY_TASK_ON_HOME)          CheckBox   FLAG_ACTIVITY_TASK_ON_HOME;
-    @BindView(R.id.FLAG_DEBUG_LOG_RESOLUTION)           CheckBox   FLAG_DEBUG_LOG_RESOLUTION;
-    @BindView(R.id.FLAG_EXCLUDE_STOPPED_PACKAGES)       CheckBox   FLAG_EXCLUDE_STOPPED_PACKAGES;
-    @BindView(R.id.FLAG_FROM_BACKGROUND)                CheckBox   FLAG_FROM_BACKGROUND;
-    @BindView(R.id.sv_flags_container)                  ScrollView svFlagsContainer;
+    @BindView(R.id.FLAG_ACTIVITY_CLEAR_TASK)
+    CheckBox FLAG_ACTIVITY_CLEAR_TASK;
+    @BindView(R.id.FLAG_ACTIVITY_CLEAR_TOP)
+    CheckBox FLAG_ACTIVITY_CLEAR_TOP;
+    @BindView(R.id.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+    CheckBox FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS;
+    @BindView(R.id.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
+    CheckBox FLAG_ACTIVITY_BROUGHT_TO_FRONT;
+    @BindView(R.id.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY)
+    CheckBox FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY;
+    @BindView(R.id.FLAG_ACTIVITY_FORWARD_RESULT)
+    CheckBox FLAG_ACTIVITY_FORWARD_RESULT;
+    @BindView(R.id.FLAG_ACTIVITY_NEW_TASK)
+    CheckBox FLAG_ACTIVITY_NEW_TASK;
+    @BindView(R.id.FLAG_ACTIVITY_NEW_DOCUMENT)
+    CheckBox FLAG_ACTIVITY_NEW_DOCUMENT;
+    @BindView(R.id.FLAG_ACTIVITY_MULTIPLE_TASK)
+    CheckBox FLAG_ACTIVITY_MULTIPLE_TASK;
+    @BindView(R.id.FLAG_ACTIVITY_NO_ANIMATION)
+    CheckBox FLAG_ACTIVITY_NO_ANIMATION;
+    @BindView(R.id.FLAG_ACTIVITY_NO_HISTORY)
+    CheckBox FLAG_ACTIVITY_NO_HISTORY;
+    @BindView(R.id.FLAG_ACTIVITY_NO_USER_ACTION)
+    CheckBox FLAG_ACTIVITY_NO_USER_ACTION;
+    @BindView(R.id.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
+    CheckBox FLAG_ACTIVITY_PREVIOUS_IS_TOP;
+    @BindView(R.id.FLAG_ACTIVITY_LAUNCH_ADJACENT)
+    CheckBox FLAG_ACTIVITY_LAUNCH_ADJACENT;
+    @BindView(R.id.FLAG_ACTIVITY_REORDER_TO_FRONT)
+    CheckBox FLAG_ACTIVITY_REORDER_TO_FRONT;
+    @BindView(R.id.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+    CheckBox FLAG_ACTIVITY_RESET_TASK_IF_NEEDED;
+    @BindView(R.id.FLAG_ACTIVITY_RETAIN_IN_RECENTS)
+    CheckBox FLAG_ACTIVITY_RETAIN_IN_RECENTS;
+    @BindView(R.id.FLAG_ACTIVITY_SINGLE_TOP)
+    CheckBox FLAG_ACTIVITY_SINGLE_TOP;
+    @BindView(R.id.FLAG_ACTIVITY_TASK_ON_HOME)
+    CheckBox FLAG_ACTIVITY_TASK_ON_HOME;
+    @BindView(R.id.FLAG_DEBUG_LOG_RESOLUTION)
+    CheckBox FLAG_DEBUG_LOG_RESOLUTION;
+    @BindView(R.id.FLAG_EXCLUDE_STOPPED_PACKAGES)
+    CheckBox FLAG_EXCLUDE_STOPPED_PACKAGES;
+    @BindView(R.id.FLAG_FROM_BACKGROUND)
+    CheckBox FLAG_FROM_BACKGROUND;
+    @BindView(R.id.sv_flags_container)
+    ScrollView svFlagsContainer;
 
-    private int    mCurrentAffinity;
-    private int    mTargetAffinity = TASK_AFFINITY_NONE;
+    private int mCurrentAffinity;
+    private int mTargetAffinity = TASK_AFFINITY_NONE;
     private String mOriginTitle;
 
     @Override
@@ -117,6 +140,7 @@ public abstract class BaseActivity extends Activity {
 
     @Override
     public void finish() {
+        setResult(hashCode() & 0xFFFF);
         super.finish();
         Log.e(TAG, String.format(Locale.ENGLISH, "Action -> finish: activity=%s, hashCode=0x%X", getClass().getSimpleName(), hashCode()));
     }
@@ -155,7 +179,7 @@ public abstract class BaseActivity extends Activity {
     private void changeTaskAffinity(int target) {
         mTargetAffinity = target;
         String currentAffinity = parseTaskAffinityName(mCurrentAffinity);
-        String targetAffinity  = parseTaskAffinityName(target);
+        String targetAffinity = parseTaskAffinityName(target);
         setTitle(String.format(Locale.ENGLISH, "%s %s - %s", mOriginTitle, currentAffinity, targetAffinity));
     }
 
@@ -216,9 +240,19 @@ public abstract class BaseActivity extends Activity {
         Log.e(TAG, String.format(Locale.ENGLISH, "Action -> onUserLeaveHint: activity=%s, hashCode=0x%X", getClass().getSimpleName(), hashCode()));
     }
 
-    @OnClick(R.id.standard)
-    void standard(View view) {
-        startActivity(getStandardActivityClassByTaskAffinity());
+    @OnClick(R.id.standard_1)
+    void standard_1(View view) {
+        startActivity(getStandardActivityClassByTaskAffinity(1));
+    }
+
+    @OnClick(R.id.standard_2)
+    void standard_2(View view) {
+        startActivity(getStandardActivityClassByTaskAffinity(2));
+    }
+
+    @OnClick(R.id.standard_3)
+    void standard_3(View view) {
+        startActivity(getStandardActivityClassByTaskAffinity(3));
     }
 
     @OnClick(R.id.singleTop)
@@ -238,7 +272,7 @@ public abstract class BaseActivity extends Activity {
 
     @OnClick(R.id.standard_forResult)
     void standardForResult(View view) {
-        startActivityForResult(getStandardActivityClassByTaskAffinity());
+        startActivityForResult(getStandardActivityClassByTaskAffinity(0));
     }
 
     @OnClick(R.id.singleTop_forResult)
@@ -256,17 +290,30 @@ public abstract class BaseActivity extends Activity {
         startActivityForResult(getSingleInstanceActivityClassByTaskAffinity());
     }
 
-    private Class<? extends BaseActivity> getStandardActivityClassByTaskAffinity() {
+    @SuppressWarnings("all")
+    private Class<? extends BaseActivity> getStandardActivityClassByTaskAffinity(int which) {
+        String targetAffinity = "";
         switch (mTargetAffinity) {
             case TASK_AFFINITY_A:
-                return StandardActivity_AffinityA.class;
+                targetAffinity = "_AffinityA";
+                break;
             case TASK_AFFINITY_B:
-                return StandardActivity_AffinityB.class;
+                targetAffinity = "_AffinityB";
+                break;
             case TASK_AFFINITY_C:
-                return StandardActivity_AffinityC.class;
+                targetAffinity = "_AffinityC";
+                break;
             case TASK_AFFINITY_NONE:
             default:
-                return StandardActivity.class;
+                break;
+        }
+        if (which <= 0 || which > 3) {
+            which = 1;
+        }
+        try {
+            return (Class<? extends BaseActivity>) Class.forName(String.format(Locale.ENGLISH, "%s.StandardActivity%s_%d", getClass().getPackage().getName(), targetAffinity, which));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
