@@ -156,7 +156,7 @@ public abstract class BaseActivity extends Activity {
         mTargetAffinity = target;
         String currentAffinity = parseTaskAffinityName(mCurrentAffinity);
         String targetAffinity  = parseTaskAffinityName(target);
-        setTitle(String.format(Locale.ENGLISH, "%s %s -- %s", mOriginTitle, currentAffinity, targetAffinity));
+        setTitle(String.format(Locale.ENGLISH, "%s %s - %s", mOriginTitle, currentAffinity, targetAffinity));
     }
 
     private String parseTaskAffinityName(int affinity) {
@@ -173,7 +173,7 @@ public abstract class BaseActivity extends Activity {
                 break;
             case TASK_AFFINITY_NONE:
             default:
-                targetAffinity = "NA";
+                targetAffinity = "·";
                 break;
         }
         return targetAffinity;
@@ -207,7 +207,7 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e(TAG, String.format(Locale.ENGLISH, "Action -> onActivityResult: activity=%s, hashCode=0x%X, requestCode=%d, resultCode=%d, data=%s", getClass().getSimpleName(), hashCode(), requestCode, resultCode, String.valueOf(data)));
+        Log.e(TAG, String.format(Locale.ENGLISH, "Action -> onActivityResult: activity=%s, hashCode=0x%X, requestCode=0x%X, resultCode=0x%X, data=%s", getClass().getSimpleName(), hashCode(), requestCode, resultCode, String.valueOf(data)));
     }
 
     @Override
