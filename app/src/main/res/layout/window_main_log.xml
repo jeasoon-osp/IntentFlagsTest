@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/jeasoon_tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C000"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="#FFF"
+        android:textSize="12sp"
+        tools:ignore="SmallSp" />
+
+    <View
+        android:id="@+id/jeasoon_v_handle_bar_start"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start" />
+
+    <View
+        android:id="@+id/jeasoon_v_handle_bar_end"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end" />
+
+    <View
+        android:id="@+id/jeasoon_v_handle_bar_top"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_gravity="top" />
+
+    <View
+        android:id="@+id/jeasoon_v_handle_bar_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom" />
+
+</FrameLayout>

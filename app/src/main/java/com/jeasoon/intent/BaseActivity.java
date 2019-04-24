@@ -2,7 +2,10 @@ package com.jeasoon.intent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,59 +25,59 @@ public abstract class BaseActivity extends Activity {
     private static final String TAG = "zjs";
 
     private static final int TASK_AFFINITY_NONE = 0;
-    private static final int TASK_AFFINITY_A = 1;
-    private static final int TASK_AFFINITY_B = 2;
-    private static final int TASK_AFFINITY_C = 3;
+    private static final int TASK_AFFINITY_A    = 1;
+    private static final int TASK_AFFINITY_B    = 2;
+    private static final int TASK_AFFINITY_C    = 3;
 
     @BindView(R.id.FLAG_ACTIVITY_CLEAR_TASK)
-    CheckBox FLAG_ACTIVITY_CLEAR_TASK;
+    CheckBox   FLAG_ACTIVITY_CLEAR_TASK;
     @BindView(R.id.FLAG_ACTIVITY_CLEAR_TOP)
-    CheckBox FLAG_ACTIVITY_CLEAR_TOP;
+    CheckBox   FLAG_ACTIVITY_CLEAR_TOP;
     @BindView(R.id.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
-    CheckBox FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS;
+    CheckBox   FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS;
     @BindView(R.id.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
-    CheckBox FLAG_ACTIVITY_BROUGHT_TO_FRONT;
+    CheckBox   FLAG_ACTIVITY_BROUGHT_TO_FRONT;
     @BindView(R.id.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY)
-    CheckBox FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY;
+    CheckBox   FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY;
     @BindView(R.id.FLAG_ACTIVITY_FORWARD_RESULT)
-    CheckBox FLAG_ACTIVITY_FORWARD_RESULT;
+    CheckBox   FLAG_ACTIVITY_FORWARD_RESULT;
     @BindView(R.id.FLAG_ACTIVITY_NEW_TASK)
-    CheckBox FLAG_ACTIVITY_NEW_TASK;
+    CheckBox   FLAG_ACTIVITY_NEW_TASK;
     @BindView(R.id.FLAG_ACTIVITY_NEW_DOCUMENT)
-    CheckBox FLAG_ACTIVITY_NEW_DOCUMENT;
+    CheckBox   FLAG_ACTIVITY_NEW_DOCUMENT;
     @BindView(R.id.FLAG_ACTIVITY_MULTIPLE_TASK)
-    CheckBox FLAG_ACTIVITY_MULTIPLE_TASK;
+    CheckBox   FLAG_ACTIVITY_MULTIPLE_TASK;
     @BindView(R.id.FLAG_ACTIVITY_NO_ANIMATION)
-    CheckBox FLAG_ACTIVITY_NO_ANIMATION;
+    CheckBox   FLAG_ACTIVITY_NO_ANIMATION;
     @BindView(R.id.FLAG_ACTIVITY_NO_HISTORY)
-    CheckBox FLAG_ACTIVITY_NO_HISTORY;
+    CheckBox   FLAG_ACTIVITY_NO_HISTORY;
     @BindView(R.id.FLAG_ACTIVITY_NO_USER_ACTION)
-    CheckBox FLAG_ACTIVITY_NO_USER_ACTION;
+    CheckBox   FLAG_ACTIVITY_NO_USER_ACTION;
     @BindView(R.id.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
-    CheckBox FLAG_ACTIVITY_PREVIOUS_IS_TOP;
+    CheckBox   FLAG_ACTIVITY_PREVIOUS_IS_TOP;
     @BindView(R.id.FLAG_ACTIVITY_LAUNCH_ADJACENT)
-    CheckBox FLAG_ACTIVITY_LAUNCH_ADJACENT;
+    CheckBox   FLAG_ACTIVITY_LAUNCH_ADJACENT;
     @BindView(R.id.FLAG_ACTIVITY_REORDER_TO_FRONT)
-    CheckBox FLAG_ACTIVITY_REORDER_TO_FRONT;
+    CheckBox   FLAG_ACTIVITY_REORDER_TO_FRONT;
     @BindView(R.id.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
-    CheckBox FLAG_ACTIVITY_RESET_TASK_IF_NEEDED;
+    CheckBox   FLAG_ACTIVITY_RESET_TASK_IF_NEEDED;
     @BindView(R.id.FLAG_ACTIVITY_RETAIN_IN_RECENTS)
-    CheckBox FLAG_ACTIVITY_RETAIN_IN_RECENTS;
+    CheckBox   FLAG_ACTIVITY_RETAIN_IN_RECENTS;
     @BindView(R.id.FLAG_ACTIVITY_SINGLE_TOP)
-    CheckBox FLAG_ACTIVITY_SINGLE_TOP;
+    CheckBox   FLAG_ACTIVITY_SINGLE_TOP;
     @BindView(R.id.FLAG_ACTIVITY_TASK_ON_HOME)
-    CheckBox FLAG_ACTIVITY_TASK_ON_HOME;
+    CheckBox   FLAG_ACTIVITY_TASK_ON_HOME;
     @BindView(R.id.FLAG_DEBUG_LOG_RESOLUTION)
-    CheckBox FLAG_DEBUG_LOG_RESOLUTION;
+    CheckBox   FLAG_DEBUG_LOG_RESOLUTION;
     @BindView(R.id.FLAG_EXCLUDE_STOPPED_PACKAGES)
-    CheckBox FLAG_EXCLUDE_STOPPED_PACKAGES;
+    CheckBox   FLAG_EXCLUDE_STOPPED_PACKAGES;
     @BindView(R.id.FLAG_FROM_BACKGROUND)
-    CheckBox FLAG_FROM_BACKGROUND;
+    CheckBox   FLAG_FROM_BACKGROUND;
     @BindView(R.id.sv_flags_container)
     ScrollView svFlagsContainer;
 
-    private int mCurrentAffinity;
-    private int mTargetAffinity = TASK_AFFINITY_NONE;
+    private int    mCurrentAffinity;
+    private int    mTargetAffinity = TASK_AFFINITY_NONE;
     private String mOriginTitle;
 
     @Override
@@ -154,6 +157,12 @@ public abstract class BaseActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.log:
+                showLogWindow();
+                return true;
+            case R.id.stack:
+                showStackWindow();
+                return true;
             case R.id.select_all:
                 setAllCheckBoxSelection(true);
                 return true;
@@ -176,10 +185,45 @@ public abstract class BaseActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void showLogWindow() {
+        if (!checkSystemWindowEnabled()) {
+            Toast.makeText(this, "请开启系统窗口权限", Toast.LENGTH_SHORT).show();
+            requestSystemWindowPermission();
+            return;
+        }
+        if (IntentApplication.isLogWindowOpened()) {
+            IntentApplication.closeLogWindow();
+        } else {
+            IntentApplication.openLogWindow();
+        }
+    }
+
+    private void showStackWindow() {
+        if (!checkSystemWindowEnabled()) {
+            Toast.makeText(this, "请开启系统窗口权限", Toast.LENGTH_SHORT).show();
+            requestSystemWindowPermission();
+            return;
+        }
+    }
+
+    @SuppressWarnings("all")
+    private boolean checkSystemWindowEnabled() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(this);
+    }
+
+    private void requestSystemWindowPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        startActivity(intent);
+    }
+
     private void changeTaskAffinity(int target) {
         mTargetAffinity = target;
         String currentAffinity = parseTaskAffinityName(mCurrentAffinity);
-        String targetAffinity = parseTaskAffinityName(target);
+        String targetAffinity  = parseTaskAffinityName(target);
         setTitle(String.format(Locale.ENGLISH, "%s %s - %s", mOriginTitle, currentAffinity, targetAffinity));
     }
 

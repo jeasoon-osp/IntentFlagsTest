@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jeasoon.intent">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
+        android:name=".IntentApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">

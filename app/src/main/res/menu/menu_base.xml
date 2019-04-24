@@ -3,6 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
+        android:id="@+id/log"
+        android:contentDescription="@null"
+        android:showAsAction="ifRoom"
+        android:title="Log"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/stack"
+        android:contentDescription="@null"
+        android:showAsAction="ifRoom"
+        android:title="Stack"
+        tools:ignore="HardcodedText" />
+
+    <item
         android:id="@+id/select_all"
         android:contentDescription="@null"
         android:showAsAction="never"
