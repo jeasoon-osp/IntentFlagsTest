@@ -18,6 +18,7 @@ public class IntentApplication extends Application {
         sInstance = this;
         mLogWindow = new LogWindow();
         mLogWindow.addFilterTag(TAG);
+        mLogWindow.startLogTracker();
     }
 
     public static void openLogWindow() {

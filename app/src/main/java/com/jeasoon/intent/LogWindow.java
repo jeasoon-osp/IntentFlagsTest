@@ -101,12 +101,18 @@ class LogWindow {
     void openLogWindow() {
         closeLogWindow();
         doOpenLogWindow();
-        doOpenLogTracker();
     }
 
     void closeLogWindow() {
-//        doCloseLogTracker();
         doCloseLogWindow();
+    }
+
+    void startLogTracker() {
+        doStartLogTracker();
+    }
+
+    void stopLogTracker() {
+        doStopLogTracker();
     }
 
     boolean isLogWindowOpened() {
@@ -129,6 +135,12 @@ class LogWindow {
 
     private void doOpenLogWindow() {
         mWindowManager.addView(flContainer, mWindowLayoutParams);
+        boolean shouldAutoScroll = !tvLogView.canScrollVertically(1);
+        int     textHeight       = tvLogView.getLineHeight() * tvLogView.getLineCount();
+        int     viewHeight       = tvLogView.getMeasuredHeight();
+        if (shouldAutoScroll && viewHeight <= textHeight) {
+            tvLogView.scrollBy(0, textHeight - tvLogView.getScrollY() - viewHeight);
+        }
         logWindowOpened = true;
     }
 
@@ -140,9 +152,11 @@ class LogWindow {
         logWindowOpened = false;
     }
 
-    private void doOpenLogTracker() {
-        if (mLogTrackThread != null) {
-            return;
+    private void doStartLogTracker() {
+        synchronized (this) {
+            if (mLogTrackThread != null && !mLogTrackThread.isInterrupted() && mLogTrackThread.isAlive()) {
+                return;
+            }
         }
         Thread thread = new Thread(() -> {
             Process        clearProcess  = null;
@@ -168,8 +182,14 @@ class LogWindow {
                         }
                         String nextLine = line;
                         tvLogView.post(() -> {
+                            boolean shouldAutoScroll = !tvLogView.canScrollVertically(1);
                             tvLogView.append(nextLine);
                             tvLogView.append("\n");
+                            int textHeight = tvLogView.getLineHeight() * tvLogView.getLineCount();
+                            int viewHeight = tvLogView.getMeasuredHeight();
+                            if (shouldAutoScroll && viewHeight <= textHeight) {
+                                tvLogView.scrollBy(0, textHeight - tvLogView.getScrollY() - viewHeight);
+                            }
                         });
                     }
                 }
@@ -196,19 +216,25 @@ class LogWindow {
                         logcatProcess.destroy();
                     }
                 }
-                if (mLogTrackThread == Thread.currentThread()) {
-                    mLogTrackThread = null;
+                synchronized (this) {
+                    if (mLogTrackThread == Thread.currentThread()) {
+                        mLogTrackThread = null;
+                    }
                 }
             }
         });
-        mLogTrackThread = thread;
+        synchronized (this) {
+            mLogTrackThread = thread;
+        }
         thread.start();
     }
 
-    private void doCloseLogTracker() {
-        if (mLogTrackThread != null) {
-            mLogTrackThread.interrupt();
-            mLogTrackThread = null;
+    private void doStopLogTracker() {
+        synchronized (this) {
+            if (mLogTrackThread != null) {
+                mLogTrackThread.interrupt();
+                mLogTrackThread = null;
+            }
         }
     }
 
