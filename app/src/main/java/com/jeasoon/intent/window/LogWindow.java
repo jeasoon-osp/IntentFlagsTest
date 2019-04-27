@@ -85,7 +85,7 @@ public class LogWindow {
         WindowManager.LayoutParams layoutParams = mWindowLayoutParams;
         layoutParams.x = 0;
         layoutParams.y = 140;
-        layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        layoutParams.type = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         layoutParams.gravity = Gravity.START | Gravity.TOP;
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = windowMinHeight;

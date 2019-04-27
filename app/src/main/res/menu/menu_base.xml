@@ -14,6 +14,7 @@
         android:contentDescription="@null"
         android:showAsAction="ifRoom"
         android:title="Stack"
+        android:visible="false"
         tools:ignore="HardcodedText" />
 
     <item
